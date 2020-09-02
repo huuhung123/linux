@@ -1,0 +1,232 @@
+<!-- # Simple examples
+
+echo Some text
+echo Some text > file.txt (overwrite) -> cat file.txt -> Some text         >> (not overwrite)
+
+
+cat > out.put -> 
+
+less file -> (space: B, /.., n,...)
+
+# Arithmentic Expansion
+
+echo $((2 + 2))
+echo $(((2 + 2)*3))
+
+echo $USER
+echo $LANG
+
+cal
+cal 2020, cal 7 2020
+date
+history ->  1 echo Hello -> !1 -> Hello
+clear history -> history -c; history -w
+
+# Brace Expansion
+
+echo this is the alphbet {A..Z}
+echo this is the alphbet _{A,Z}
+echo this is the alphbet _{1..5} -> touch number_{1, 3, 4}
+
+echo '$((1+2))'
+echo this cost \$10.00, echo you \& me
+echo there are many spaces     here
+echo "there are many spaces     here"
+mkdir {jan, feb, ..., dec}_{2017..2022}
+touch {jan, feb, ..., dec}_{2017..2022}/file{1..100}
+ls {jan, feb, ..., dec}_{2017..2022} (> out.txt)
+mkdir hapy birthday <==> mkdir "hapy birthday"
+mkdir -p parent/dir0 -> sẽ tạo ra, nếu mà k có -p thì k tạo ra dc (can be used to create entire folder paths)
+mkdir -p delfolder/deleteme{1,2,3}
+touch delfolder/deletee{1,2,3}/file{1,2,3} -> rm -ri delfolder/
+cp file1.csv file2.csv dir1/ -> cp file?.csv dir1/ cp -a file?.csv dir1/
+touch file{a,B,C}{A..C}.txt
+ls -l file*(file1.csv file2.csv) 
+ls -l dir1/file* (file1.csv file2.csv) 
+rm -vi FILE*.txt // delete file rm *2*, rm *[2,3]*
+rm -r, rmdir commands to delete folder    
+the i option will allow the rm command to be interactive when deleting
+
+
+cp: copy file, folder
+cp file1.txt file2.txt destination/
+rm file*
+cp destination/* . (..)
+the r option allows you to copy entire folders recursively
+cp -r copy_me/ destination/
+
+mv to move and rename files and folders
+mv oldfolder/ newfolder
+mv newfolder/* . -> mv file* newfolder/
+mv newfolder/ ~/Documents/
+mv ~/Documents/newfolder/ ./jackpot
+
+locate command to search for files
+locate *.conf -> ...
+- The locate command seraches a db for files and returns a list of results.
+- Using a db is very fast, but requires updating
+- To help protect aganst errors you can use the --sxisting and --fllow options
+- Best thing to do is just update the db (done automaticaally daily)
+- This requires admin privileges and therefore the sudo command is used
+
+find: find: tìm tại chính thư mục hiện tại, find /home
+find . -maxdepth 2
+find . -type d(directory) f(file)
+find /etc -maxdepth 1 -type f
+find . -name "3.txt" "*.txt"
+find -iname "TXT"
+
+cat alpha.txt <==> tac alpha.txt
+cat file [1-5].txt | tac (tac > reversed.txt)
+people
+beautiful
+you
+there
+hello
+
+cat file [1-5].txt | tac | rev
+elpoep
+lufituaeb
+uoy
+ereht
+olleh
+
+less
+
+find | less
+
+cat file [1-5].txt | head -n 2 (tail -n 2)
+find | head -n 5 | tac
+
+Read file
+cat file[1-5].txt > beautiful.txt
+
+sort file
+sort words.txt > sorted.txt <==> sort -r words.txt | less
+sort -n(nr) numbers.txt | less
+
+rmdir command will only delete folders that are empty 
+head -n 15 Trump.txt tail -n 1 Trump.txt
+
+WILDCARD <==> REGULAR EXPRESSIONS
+- *: mtaches anything, regardless of length
+- ?: matches anything, butt just for one place
+- []: matches just one place, but allows you to specify options.
+ls *.txt, file[123].txt <==> file[1-3].txt, file?.txt, FILE[0-9ABC] file[0-9][A-Z][a-z].txt
+ls f*
+ls [Ff]* <==> ls [!Ff]*
+ls FILE??.txt
+ls [[:alpha:]]* ls [![:alpha:]]*
+ls [[:digit:]]* ls [![:digit:]]* lower, upper
+ls FILE[s1]*.txt (s hoặc 1 rồi ở sau)
+ls -l /etc | head -n 20
+
+Sort tabular data using the -k option
+3nr : sort using column 3, and use the -n and -r option
+ls -lh /etc | head -n 20 | sort -k 5hr
+
+(wc -l manuscript.txt)
+
+Searching File content using grep command
+grep -i a manuscript.txt
+grep -ic a ("our boys") manuscript.txt 
+man -k print | grep files
+
+Archiving and compression (XEM TIEEP, gzip, bzip)
+tar -cvf ourarchive.tar
+tar -xvf ourarchive.tar
+
+
+ls Documents Dowloads Pictures Desktop <==> ls *
+ls D* => Desktop Documents Downloads
+
+BASH SCRIPT
+- Allow you to store usefull command sequences in files
+- must have #!/bin/bash as the first line
+- Scripts are more powerfuul than alases and can be sacheduled
+#!/bin/bash
+
+mkdir ~/Desktop/magic
+cd ~/Desktop/magic
+touch file{1..100}
+ls -lh ~/Desktop/magic > ~/Desktop/magic.log  -> bash out.sh
+
+
+CRON...
+
+/bin - Binaries: contains programs that are essential for the system to boot and run
+ - executable, binary, essential 
+/boot - Boot Files: constains the Linux kernel, initial RAM disk image for drives need at boot time
+ - Linux kernel, initial RAM disk image, boot loader(GRUB)  /boot/grub contains grub configuration files, /boot/vmlinuz contains the Linux kernel
+/dev - device Nodes
+ - all devices represented here as files, /dev/sda1 (sda - name of a disk) USB devices, cpu etc
+
+
+HARD vs SYMBOLIC Links(về phía hệ điều hành các file được phân biệt định danh bằng chỉ số inode.)
+- ln file_name hard_link_name
+
+- ln -s file_name soft_link_name
+- ln -s folder_name soft_link_name
+
+ln file1 hardLink
+ln -s file2 softLink
+ls -l -> file1 file2 hardLink softLink -> file2
+
+-->
+
+<!-- 
+DIFFERENCE between the commands, terminal, shell
+- Commands are just text you type in the terminal.
+- Commands are interpreted by the shell.
+- Different shells can interpret the same text in different ways.
+- The terminal is the window to the shell.
+- Commands are case-sensitive
+
+
+which echo -> /bin/echo, which cal -> /usr/bin/cal
+
+command = Command Name -options(-option 1 -option 2) inputs(input 1 input 2)
+ - CmmmandName needs to be on the shell's search path.
+ - Commands operate on inputs.
+ - Options modify a command's behaviour
+
+man man -> list 8 sections manual page (Manual structure)
+
+Section   COntains
+1         User commands //
+2         System calls  
+3         C library functions
+4         Device and special files
+5         FIle formats and conventions  //
+6         Games 
+7         Miscellaneous
+8         System administation          //
+
+
+man -k which 
+-> man 1 which
+man -k "list dicretort contents" ->
+dir(1)           ...      -> man 1 ls (man ls)
+ls (1)            ...
+ntfsls(8)         .. on an NTFS
+vdir(1)            ...
+-
+
+Command Input + Output
+- Learn about the different ways a command can take input and give output.
+- You will understand the ways data flows into and out of command.
+- Be ready to connect commands together to build powerful pipelines
+
+LINUX FILE SYSTEM
+- Follows a tree-like structure
+- Everything can be traced bac to the / directory
+- The root user has absolute power of the system
+- /home stores home directories for all regular users on the system
+
+
+Absolute paths start at the base (/) directory
+Relative paths start from the current directory
+->
+<--
+PIPING(tee, xargs)
+-->
